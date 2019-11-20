@@ -1,8 +1,7 @@
 view: test_dt {
   derived_table: {
-    sql: select count(CASE WHEN gender = "m" THEN id ELSE NULL END) as count_male, count(CASE WHEN gender = "f" then id ELSE NULL END) as count_female, count(*) as count_all, ROUND(((count_all-count_female)/count_all)*100,2) AS percentage_male
-      from demo_db.users
-       ;;
+    sql: select a.count_male, a.count_female, a.count_all, ROUND((a.count_male/a.count_all)*100,2) AS percent_male
+from (select count(CASE WHEN gender = "m" THEN id ELSE NULL END) as count_male, count(CASE WHEN gender = "f" then id ELSE NULL END) as count_female, count(*) as count_all from demo_db.users) as a ;;
   }
 
   measure: count_male {
@@ -22,7 +21,7 @@ view: test_dt {
 
   measure: percentage_male {
     type: number
-    sql: ${TABLE}.percentage_male ;;
+    sql: ROUND((${count_male}/${count_all})*100,2) ;;
   }
 
 
