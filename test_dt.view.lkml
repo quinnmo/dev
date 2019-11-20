@@ -6,22 +6,22 @@ from (select count(CASE WHEN gender = "m" THEN id ELSE NULL END) as count_male, 
 
   measure: count_male {
     type: number
-    sql: ${TABLE}.count_male ;;
+    sql: count_male ;;
   }
 
   measure: count_female {
     type: number
-    sql: ${TABLE}.count_female ;;
+    sql: count_female ;;
   }
 
   measure: count_all {
     type: number
-    sql: ${TABLE}.count_all ;;
+    sql: count_all ;;
   }
 
-  measure: percentage_male {
+  measure: percent_male {
     type: number
-    sql: ROUND((${count_male}/${count_all})*100,2) ;;
+    sql: percent_male ;;
   }
 
 
