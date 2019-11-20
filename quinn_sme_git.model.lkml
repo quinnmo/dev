@@ -75,3 +75,5 @@ explore: user_data {
 explore: users {}
 
 explore: users_nn {}
+
+explore: test_dt {}
